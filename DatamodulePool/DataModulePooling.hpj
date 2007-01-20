@@ -1,0 +1,24 @@
+; This file is maintained by HCW. Do not modify this file directly.
+; Created by HelpGen 12/27/2003 8:34:53 AM.
+
+[OPTIONS]
+COMPRESS=12 Hall Zeck
+DBCS=Yes
+NOTES=0
+LCID=0x409 0x0 0x0 ; English (United States)
+REPORT=No
+CHARSET=1
+CONTENTS=DataModulePooling.cnt
+TITLE=DataModule Pooling
+BMROOT=c:\development\arcana\common\DataModulePool\
+HLP=c:\development\arcana\common\DataModulePool\DataModulePooling.hlp
+
+[FILES]
+c:\development\arcana\common\DataModulePool\DataModulePooling.rtf
+
+[WINDOWS]
+main="DataModule Pooling",,0,(r16777215),(r16777215), f4
+list="DataModule Pooling",(0,264,280,280),4,(r14876671),(r12632256),f2
+example="Example",(480,18,543,969),4,(r14876671),(r8454143),f3;Examples
+[CONFIG]
+BrowseButtons()

@@ -1,0 +1,3909 @@
+{\rtf1\ansi\ansicpg1251\deff0\deftab720
+{\fonttbl
+{\f0\fmodern\fcharset0 Courier New;}
+{\f1\fswiss\ Arial;}
+{\f2\fmodern\ Courier New;}
+}
+{\colortbl
+\red0\green0\blue0;
+\red128\green0\blue0;
+\red0\green128\blue0;
+\red128\green128\blue0;
+\red0\green0\blue128;
+\red128\green0\blue128;
+\red0\green128\blue128;
+\red128\green128\blue128;
+\red192\green192\blue192;
+\red255\green0\blue0;
+\red0\green255\blue0;
+\red255\green255\blue0;
+\red0\green0\blue255;
+\red255\green0\blue255;
+\red0\green255\blue255;
+\red255\green255\blue255;
+}
+{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_DataModule Pooling_Project }}}
+{A{\footnote {A}{ DataModule Pooling_Project }}}
+{${\footnote {$}{ Project DataModule Pooling }}}
+{K{\footnote {K}{ DataModule Pooling }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 DataModule Pooling\line }
+\par
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Packages:\line }
+\pard\tx4000\tx8000\tx12000{\uldb\f1\fs20\cf0 Overview}
+\pard\tx4000\tx8000\tx12000{\v\f1\fs20\cf0 IDH_Overview_Package}
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0  }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \tab }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0  }
+\par
+}\page{
+{#{\footnote {#}{ IDH_Legend_Property }}}
+\pard\tx{\b\f1\fs20\cf0 Scope\line }
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}Published\line \line }
+\pard\tx{\b\f1\fs20\cf0 Accessibility\line }
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}Read Only}
+}\page{
+{#{\footnote {#}{ IDH_Legend_Method }}}
+\pard\tx{\b\f1\fs20\cf0 Scope\line }
+}\page{
+{#{\footnote {#}{ IDH_Legend_Event }}}
+\pard\tx{\b\f1\fs20\cf0 Scope}
+\pard\tx{\f1\fs20\cf0 \line \{bmlt $TMP_PUBLISHED\}Published}
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100010_Example }}}
+{A{\footnote {A}{ 100010_Example }}}
+{${\footnote {$}{ Example A Note About Scalability }}}
+{K{\footnote {K}{ A Note About Scalability }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 A Note About Scalability\line }
+\par
+\pard\tx{\f1\fs20\cf0 While pooling is designed to help improve your application's scalability, pooling misuse can have the opposite effect.  To help ensure maximum scalability, be sure to follow these rules:\line \line 1) Maintain an Appropriate Pool Size - It is possible to have a pool that is too large.  Creating too many DataModules (and therefore too many Database connections) can use up extra memory that would otherwise be accessible to more important parts of your application.\line \line 2) Unlock DataModules as Soon as Possible - The longer your DataModules are locked, the less time they are available to respond to other requests and therefore the larger the pool you will need.  The quicker you can lock and unlock the DataModule the more scalable your application will be.  Ideally, a DataModule would be locked for no longer than a few milliseconds and in very rare cases maybe up to a second.  Locking DataModules longer can devastate an application.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100008_Example }}}
+{A{\footnote {A}{ 100008_Example }}}
+{${\footnote {$}{ Example License }}}
+{K{\footnote {K}{ License }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 License\line }
+\par
+\pard\tx{\f1\fs20\cf0 This code is covered by the Mozilla Public License 1.1 (MPL 1.1)  \line The official text of this license can be found at {\uldb http://www.opensource.org/licenses/mozilla1.1.html}{\v !ExecFile('http://www.opensource.org/licenses/mozilla1.1.html') }}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100004_Example }}}
+{A{\footnote {A}{ 100004_Example }}}
+{${\footnote {$}{ Example Using Pooling with Indy }}}
+{K{\footnote {K}{ Using Pooling with Indy }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 Using Pooling with Indy\line }
+\par
+\pard\tx{\f1\fs20\cf0 This is an example of using pooling in your Indy applications.  \line \line In your Indy applications, you may or may not have a "Global" module suitable for creating your Pooling component at design-time.  This example will assume that you do not and that you must create a helper class as a global pooling repository.  If you do have a "Global" module (a module that is accessible from all threads), then you can create the component at design-time, eliminating the need for the helper class.\line \line Remember that even though you may be accessing the pooling object from multiple threads simultaneously, the object was written to be used in a global fashion and are completely thread safe.\line \line Also, please note that the following example uses Indy 10.  The methods are nearly identical for earlier versions of Indy and should be easily back-ported.}
+\par
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 Steps: }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 1) }
+\pard\tx{\b\f2\fs20\cf0 To}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 simplify }
+\pard\tx{\f2\fs20\cf0 usage }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 it's }
+\pard\tx{\f2\fs20\cf0 events, }
+\pard\tx{\f2\fs20\cf0 we }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 by }
+\pard\tx{\f2\fs20\cf0 creating }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 class.}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\f2\fs20\cf0 = }
+\pard\tx{\f2\fs20\cf0 class(TObject) }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 private}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 public}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 destructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Destroy; }
+\pard\tx{\b\f2\fs20\cf0 override}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 2) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows, }
+\pard\tx{\f2\fs20\cf0 setting }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 PoolCount }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 required }
+\pard\tx{\b\f2\fs20\cf0 for}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 application. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 If}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 needed, }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 can }
+\pard\tx{\f2\fs20\cf0 load }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 value }
+\pard\tx{\f2\fs20\cf0 from }
+\pard\tx{\f2\fs20\cf0 an }
+\pard\tx{\f2\fs20\cf0 ini }
+\pard\tx{\b\f2\fs20\cf0 file}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 or}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 registry }
+\pard\tx{\f2\fs20\cf0 allowing }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 adjust }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 size }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 pool }
+\pard\tx{\f2\fs20\cf0 without }
+\pard\tx{\f2\fs20\cf0 recompiling. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \{ }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\f2\fs20\cf0 \} }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool.Create(nil); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.PoolCount }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 20; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Active }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 True; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 3) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 destructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Destroy; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Active }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 False; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 inherited}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 4) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 method }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Note }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\f2\fs20\cf0 should }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 changed }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 data }
+\pard\tx{\f2\fs20\cf0 module }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 wish }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 pool. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.OnCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule.Create(nil); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 5) }
+\pard\tx{\f2\fs20\cf0 Add }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 clause }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 WebModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 SysUtils, }
+\pard\tx{\f2\fs20\cf0 Classes, }
+\pard\tx{\f2\fs20\cf0 IdHTTPServer, }
+\pard\tx{\f2\fs20\cf0 DataModuleServerPool, }
+\pard\tx{\f2\fs20\cf0 MyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 6) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 method }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.OnFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 7) }
+\pard\tx{\f2\fs20\cf0 Add }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 helper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 variable }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 instantiate }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 variable }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 initialization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 section }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 unit.}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Free }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 variable }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 finalization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 section. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 MyServer }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyServerModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TPoolHelper; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 implementation}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 ....... }
+\pard\tx{\f2\fs20\cf0 other }
+\pard\tx{\f2\fs20\cf0 code }
+\pard\tx{\f2\fs20\cf0 here }
+\pard\tx{\f2\fs20\cf0 ...... }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 initialization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 finalization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 8) }
+\pard\tx{\f2\fs20\cf0 Implement }
+\pard\tx{\f2\fs20\cf0 global }
+\pard\tx{\f2\fs20\cf0 functions }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 assist }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 using }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Again }
+\pard\tx{\f2\fs20\cf0 note }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\f2\fs20\cf0 should }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 replaced }
+\pard\tx{\b\f2\fs20\cf0 with}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 DataModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 LockDM }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Result }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule(PoolHelper.Pool.Acquire); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper.Pool.Release(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 9) }
+\pard\tx{\f2\fs20\cf0 Use }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 Execute }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows, }
+\pard\tx{\f2\fs20\cf0 replacing }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\b\f2\fs20\cf0 with}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TMyServer.HTTPExecute(AContext: }
+\pard\tx{\f2\fs20\cf0 TIdContext) }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 s }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\b\f2\fs20\cf0 string}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 LockDM; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 try}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.SQL.Text }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 'Select }
+\pard\tx{\f2\fs20\cf0 * }
+\pard\tx{\f2\fs20\cf0 from }
+\pard\tx{\f2\fs20\cf0 MyTable'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Open; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 s }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 ''; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 while}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 not}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.EOF }
+\pard\tx{\b\f2\fs20\cf0 do}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 s }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 s }
+\pard\tx{\f2\fs20\cf0 + }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 MyQuery.FieldByName('Description').AsString+ }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 '<br>'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Next; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Close; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 finally}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 AContext.Connection.SendCmd(s,200); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100005_Example }}}
+{A{\footnote {A}{ 100005_Example }}}
+{${\footnote {$}{ Example Using Pooling with IntraWeb }}}
+{K{\footnote {K}{ Using Pooling with IntraWeb }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 Using Pooling with IntraWeb\line }
+\par
+\pard\tx{\f1\fs20\cf0 This is an example of using pooling in your IntraWeb applications.  \line \line Fortunately, IntraWeb was nice enough to provide a "Global" module called the ServerController which is suitable for creating a Pooling component at design-time. This makes implementation of the Pooling components much more simple than in other web application infrastructures.  Even though IntraWeb produces multi-threaded web applications, the pooling components are designed to be used in a global fashion and are completely thread safe.\line \line Also, it is important to note, that it is usually not a good idea to use DataBound controls with pooled data modules.  While it can be done easily, it will limit your scalability and defeat the main purpose for pooling anyway.  If data bound controls must be used, the most scalable solution can be found in the example entitled "Using Pooling with IntraWeb & Databound Controls".}
+\par
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 Steps: }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 1) }
+\pard\tx{\f2\fs20\cf0 Drop }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool }
+\pard\tx{\f2\fs20\cf0 component }
+\pard\tx{\b\f2\fs20\cf0 on}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 ServerController. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 2) }
+\pard\tx{\f2\fs20\cf0 Create }
+\pard\tx{\f2\fs20\cf0 an }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 event }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Note }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\f2\fs20\cf0 should }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 changed }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 data }
+\pard\tx{\f2\fs20\cf0 module }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 wish }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 pool. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TServerController.PoolCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule.Create(nil); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 3) }
+\pard\tx{\f2\fs20\cf0 Add }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 clause }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 WebModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 SysUtils, }
+\pard\tx{\f2\fs20\cf0 Classes, }
+\pard\tx{\f2\fs20\cf0 IWServerControllerBase, }
+\pard\tx{\f2\fs20\cf0 IWBaseForm, }
+\pard\tx{\f2\fs20\cf0 HTTPApp, }
+\pard\tx{\f2\fs20\cf0 DataModuleServerPool, }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 IWApplication, }
+\pard\tx{\f2\fs20\cf0 IWAppForm, }
+\pard\tx{\f2\fs20\cf0 MyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 4) }
+\pard\tx{\f2\fs20\cf0 Create }
+\pard\tx{\f2\fs20\cf0 an }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 event }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TServerController.PoolFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 5) }
+\pard\tx{\f2\fs20\cf0 Implement }
+\pard\tx{\f2\fs20\cf0 global }
+\pard\tx{\f2\fs20\cf0 functions }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 assist }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 using }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Again }
+\pard\tx{\f2\fs20\cf0 note }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\f2\fs20\cf0 should }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 replaced }
+\pard\tx{\b\f2\fs20\cf0 with}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 DataModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 LockDM }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Result }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule(TServerController(GServerController).Pool.Lock); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TServerController(GServerController).Pool.Unlock(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 6) }
+\pard\tx{\f2\fs20\cf0 Use }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 IW }
+\pard\tx{\f2\fs20\cf0 Forms }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows, }
+\pard\tx{\f2\fs20\cf0 replacing }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\b\f2\fs20\cf0 with}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TIWForm1.IWAppFormRender(Sender: }
+\pard\tx{\f2\fs20\cf0 TObject); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 LockDM; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 try}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.SQL.Text }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 'Select }
+\pard\tx{\f2\fs20\cf0 * }
+\pard\tx{\f2\fs20\cf0 from }
+\pard\tx{\f2\fs20\cf0 MyTable'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Open; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 while}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 not}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.EOF }
+\pard\tx{\b\f2\fs20\cf0 do}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 txtDescription.Lines.Add( }
+\pard\tx{\f2\fs20\cf0 MyQuery.FieldByName('Description').AsString+'<br>' }
+\pard\tx{\f2\fs20\cf0 ); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Next; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Close; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 finally}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100007_Example }}}
+{A{\footnote {A}{ 100007_Example }}}
+{${\footnote {$}{ Example Using Pooling with IntraWeb & DataBound Controls }}}
+{K{\footnote {K}{ Using Pooling with IntraWeb & DataBound Controls }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 Using Pooling with IntraWeb & DataBound Controls\line }
+\par
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100006_Example }}}
+{A{\footnote {A}{ 100006_Example }}}
+{${\footnote {$}{ Example Using Pooling with WebBroker }}}
+{K{\footnote {K}{ Using Pooling with WebBroker }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 Using Pooling with WebBroker\line }
+\par
+\pard\tx{\f1\fs20\cf0 This is an example of using pooling in your WebBroker applications.  \line \line WebBroker does not have a "Global" module suitable for creating your Pooling component at design-time.  This means that we must instantiate the Pooling component at runtime in a global variable.  Even though WebBroker produces multi-threaded web servers/dlls, the pooling components are designed to be used in a global fashion and are completely thread safe.}
+\par
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 Steps: }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 1) }
+\pard\tx{\b\f2\fs20\cf0 To}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 simplify }
+\pard\tx{\f2\fs20\cf0 usage }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 it's }
+\pard\tx{\f2\fs20\cf0 events, }
+\pard\tx{\f2\fs20\cf0 we }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 by }
+\pard\tx{\f2\fs20\cf0 creating }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 same }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 our }
+\pard\tx{\f2\fs20\cf0 WebModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\f2\fs20\cf0 = }
+\pard\tx{\f2\fs20\cf0 class(TObject) }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 private}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 public}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 destructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Destroy; }
+\pard\tx{\b\f2\fs20\cf0 override}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 2) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows, }
+\pard\tx{\f2\fs20\cf0 setting }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 PoolCount }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 required }
+\pard\tx{\b\f2\fs20\cf0 for}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 application. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 If}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 needed, }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 can }
+\pard\tx{\f2\fs20\cf0 load }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 value }
+\pard\tx{\f2\fs20\cf0 from }
+\pard\tx{\f2\fs20\cf0 an }
+\pard\tx{\f2\fs20\cf0 ini }
+\pard\tx{\b\f2\fs20\cf0 file}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 or}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 registry }
+\pard\tx{\f2\fs20\cf0 allowing }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 adjust }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 size }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 pool }
+\pard\tx{\f2\fs20\cf0 without }
+\pard\tx{\f2\fs20\cf0 recompiling. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \{ }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\f2\fs20\cf0 \} }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool.Create(nil); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.PoolCount }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 20; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Active }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 True; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 3) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 destructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Destroy; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Active }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 False; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 inherited}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 4) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 method }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Note }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\f2\fs20\cf0 should }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 changed }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 data }
+\pard\tx{\f2\fs20\cf0 module }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 wish }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 pool. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.OnCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule.Create(nil); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 5) }
+\pard\tx{\f2\fs20\cf0 Add }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 clause }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 WebModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 SysUtils, }
+\pard\tx{\f2\fs20\cf0 Classes, }
+\pard\tx{\f2\fs20\cf0 HTTPApp, }
+\pard\tx{\f2\fs20\cf0 DataModuleServerPool, }
+\pard\tx{\f2\fs20\cf0 MyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 6) }
+\pard\tx{\f2\fs20\cf0 Complete }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 method }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.OnFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 7) }
+\pard\tx{\f2\fs20\cf0 Add }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 helper }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 variable }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 instantiate }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 variable }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 initialization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 section }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 unit.}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Free }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 variable }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 finalization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 section. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 WebModule2: }
+\pard\tx{\f2\fs20\cf0 TWebModule2; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TPoolHelper; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 implementation}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 ....... }
+\pard\tx{\f2\fs20\cf0 other }
+\pard\tx{\f2\fs20\cf0 code }
+\pard\tx{\f2\fs20\cf0 here }
+\pard\tx{\f2\fs20\cf0 ...... }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 initialization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 finalization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 8) }
+\pard\tx{\f2\fs20\cf0 Implement }
+\pard\tx{\f2\fs20\cf0 global }
+\pard\tx{\f2\fs20\cf0 functions }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 assist }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 using }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Again }
+\pard\tx{\f2\fs20\cf0 note }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\f2\fs20\cf0 should }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 replaced }
+\pard\tx{\b\f2\fs20\cf0 with}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 DataModule. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 LockDM }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Result }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule(PoolHelper.Pool.Acquire); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper.Pool.Release(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 9) }
+\pard\tx{\f2\fs20\cf0 Use }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 WebActions }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 follows, }
+\pard\tx{\f2\fs20\cf0 replacing }
+\pard\tx{\f2\fs20\cf0 "TMyDataModule" }
+\pard\tx{\b\f2\fs20\cf0 with}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 name. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TWebModule2.WebModule2actDefaultAction(Sender: }
+\pard\tx{\f2\fs20\cf0 TObject; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Request: }
+\pard\tx{\f2\fs20\cf0 TWebRequest; }
+\pard\tx{\f2\fs20\cf0 Response: }
+\pard\tx{\f2\fs20\cf0 TWebResponse; }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Handled: }
+\pard\tx{\f2\fs20\cf0 Boolean); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 LockDM; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 try}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.SQL.Text }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 'Select }
+\pard\tx{\f2\fs20\cf0 * }
+\pard\tx{\f2\fs20\cf0 from }
+\pard\tx{\f2\fs20\cf0 MyTable'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Open; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 while}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 not}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.EOF }
+\pard\tx{\b\f2\fs20\cf0 do}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Response.Content }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 Response.Content+ }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 MyQuery.FieldByName('Description').AsString+ }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 '<br>'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Next; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Close; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 finally}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 --------------------------------- }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 Completed }
+\pard\tx{\f2\fs20\cf0 Example }
+\pard\tx{\f2\fs20\cf0 WebModule }
+\pard\tx{\b\f2\fs20\cf0 unit:}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 unit}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Unit2; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 interface}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 uses}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 SysUtils, }
+\pard\tx{\f2\fs20\cf0 Classes, }
+\pard\tx{\f2\fs20\cf0 HTTPApp, }
+\pard\tx{\f2\fs20\cf0 DataModuleServerPool, }
+\pard\tx{\f2\fs20\cf0 MyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 type}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 We }
+\pard\tx{\f2\fs20\cf0 need }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 create }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 helper }
+\pard\tx{\b\f2\fs20\cf0 object}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 when }
+\pard\tx{\f2\fs20\cf0 working }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 WebBroker. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 We }
+\pard\tx{\f2\fs20\cf0 need }
+\pard\tx{\f2\fs20\cf0 some }
+\pard\tx{\b\f2\fs20\cf0 object}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 house }
+\pard\tx{\f2\fs20\cf0 our }
+\pard\tx{\f2\fs20\cf0 OnCreateObject/OnDestroyObject }
+\pard\tx{\f2\fs20\cf0 event. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Unfortunately, }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 WebModule }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\b\f2\fs20\cf0 is}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 not}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 adequate }
+\pard\tx{\b\f2\fs20\cf0 for}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 this }
+\pard\tx{\f2\fs20\cf0 purpose }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 multiple }
+\pard\tx{\f2\fs20\cf0 copies }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 it }
+\pard\tx{\f2\fs20\cf0 will }
+\pard\tx{\f2\fs20\cf0 be }
+\pard\tx{\f2\fs20\cf0 created }
+\pard\tx{\b\f2\fs20\cf0 at}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 runtime. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 Instead }
+\pard\tx{\f2\fs20\cf0 we }
+\pard\tx{\f2\fs20\cf0 will }
+\pard\tx{\f2\fs20\cf0 create }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\b\f2\fs20\cf0 object}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 instantiate }
+\pard\tx{\f2\fs20\cf0 this }
+\pard\tx{\b\f2\fs20\cf0 in}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\b\f2\fs20\cf0 initialization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 section. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 This }
+\pard\tx{\f2\fs20\cf0 allows }
+\pard\tx{\f2\fs20\cf0 us }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 convienient }
+\pard\tx{\f2\fs20\cf0 place }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 store }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 events }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 also }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 auto-start }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 pool }
+\pard\tx{\b\f2\fs20\cf0 object.}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\f2\fs20\cf0 = }
+\pard\tx{\f2\fs20\cf0 class(TObject) }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 private}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 public}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 destructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Destroy; }
+\pard\tx{\b\f2\fs20\cf0 override}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TWebModule2 }
+\pard\tx{\f2\fs20\cf0 = }
+\pard\tx{\f2\fs20\cf0 class(TWebModule) }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 WebModule2actDefaultAction(Sender: }
+\pard\tx{\f2\fs20\cf0 TObject; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Request: }
+\pard\tx{\f2\fs20\cf0 TWebRequest; }
+\pard\tx{\f2\fs20\cf0 Response: }
+\pard\tx{\f2\fs20\cf0 TWebResponse; }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Handled: }
+\pard\tx{\f2\fs20\cf0 Boolean); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 private}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 public}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 Note: }
+\pard\tx{\f2\fs20\cf0 TMyDataModule }
+\pard\tx{\b\f2\fs20\cf0 is}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 fictional }
+\pard\tx{\f2\fs20\cf0 DataModule }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 would }
+\pard\tx{\f2\fs20\cf0 create }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 house }
+\pard\tx{\f2\fs20\cf0 your }
+\pard\tx{\f2\fs20\cf0 page }
+\pard\tx{\f2\fs20\cf0 data. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 We }
+\pard\tx{\f2\fs20\cf0 create }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 LockDM }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 so }
+\pard\tx{\f2\fs20\cf0 that }
+\pard\tx{\f2\fs20\cf0 we }
+\pard\tx{\f2\fs20\cf0 don't }
+\pard\tx{\f2\fs20\cf0 have }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 typecast }
+\pard\tx{\f2\fs20\cf0 calls }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Lock. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 LockDM }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 WebModule2: }
+\pard\tx{\f2\fs20\cf0 TWebModule2; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TPoolHelper; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 implementation}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \{$R }
+\pard\tx{\f2\fs20\cf0 *.dfm\} }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 LockDM }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Result }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule(PoolHelper.Pool.Lock); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper.Pool.Unlock(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \{ }
+\pard\tx{\f2\fs20\cf0 TPoolHelper }
+\pard\tx{\f2\fs20\cf0 \} }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 constructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.PoolCount }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 20; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Active }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 True; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 destructor}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Destroy; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Active }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 False; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Pool.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 inherited}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.OnCreateDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule: }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TMyDataModule.Create(nil); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.OnFreeDataModule(var }
+\pard\tx{\f2\fs20\cf0 ADataModule: }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 ADataModule.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \{ }
+\pard\tx{\f2\fs20\cf0 TWebModule2 }
+\pard\tx{\f2\fs20\cf0 \} }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TWebModule2.WebModule2actDefaultAction(Sender: }
+\pard\tx{\f2\fs20\cf0 TObject; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Request: }
+\pard\tx{\f2\fs20\cf0 TWebRequest; }
+\pard\tx{\f2\fs20\cf0 Response: }
+\pard\tx{\f2\fs20\cf0 TWebResponse; }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Handled: }
+\pard\tx{\f2\fs20\cf0 Boolean); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 var}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TMyDataModule; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 This }
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 shows }
+\pard\tx{\f2\fs20\cf0 how }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 might }
+\pard\tx{\f2\fs20\cf0 make }
+\pard\tx{\f2\fs20\cf0 use }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 a }
+\pard\tx{\f2\fs20\cf0 pooled }
+\pard\tx{\f2\fs20\cf0 DataModule. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Essentially }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 you }
+\pard\tx{\f2\fs20\cf0 just }
+\pard\tx{\f2\fs20\cf0 call }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 acquireDM }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 get }
+\pard\tx{\f2\fs20\cf0 an }
+\pard\tx{\f2\fs20\cf0 instance, }
+\pard\tx{\b\f2\fs20\cf0 and}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 releaseDM }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 return }
+\pard\tx{\f2\fs20\cf0 it }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 the }
+\pard\tx{\f2\fs20\cf0 pool. }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Make }
+\pard\tx{\f2\fs20\cf0 sure }
+\pard\tx{\b\f2\fs20\cf0 to}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 reset }
+\pard\tx{\f2\fs20\cf0 any }
+\pard\tx{\f2\fs20\cf0 data }
+\pard\tx{\f2\fs20\cf0 state }
+\pard\tx{\f2\fs20\cf0 before }
+\pard\tx{\f2\fs20\cf0 using }
+\pard\tx{\b\f2\fs20\cf0 as}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 other }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 // }
+\pard\tx{\f2\fs20\cf0 threads }
+\pard\tx{\f2\fs20\cf0 may }
+\pard\tx{\f2\fs20\cf0 have }
+\pard\tx{\f2\fs20\cf0 repositioned }
+\pard\tx{\f2\fs20\cf0 cursors, }
+\pard\tx{\f2\fs20\cf0 etc. }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 LockDM; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 try}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.SQL.Text }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 'Select }
+\pard\tx{\f2\fs20\cf0 * }
+\pard\tx{\f2\fs20\cf0 from }
+\pard\tx{\f2\fs20\cf0 MyTable'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Open; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 while}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 not}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.EOF }
+\pard\tx{\b\f2\fs20\cf0 do}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 begin}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Response.Content }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 Response.Content+ }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 MyQuery.FieldByName('Description').AsString+ }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 '<br>'; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Next; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 dm.MyQuery.Close; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 finally}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 UnlockDM(dm); }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 initialization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper }
+\pard\tx{\f2\fs20\cf0 := }
+\pard\tx{\f2\fs20\cf0 TPoolHelper.Create; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 finalization}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 PoolHelper.Free; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f2\fs20\cf0 end.}
+\pard\tx{\f2\fs20\cf0  }
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_100009_Example }}}
+{A{\footnote {A}{ 100009_Example }}}
+{${\footnote {$}{ Example Who Are We? }}}
+{K{\footnote {K}{ Who Are We? }}}
+{>{\footnote {>}{ example }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 Who Are We?\line }
+\par
+\pard\tx{\f1\fs20\cf0 These components were written by Jason Southwell of Arcana Technologies.  \line \line Arcana Technologies is a premier leader in internet technology and software development. In December of 2000 a small group of developers banded together under a common goal of making the internet a better place. They founded what is today Arcana Technologies. \line \line Today, Arcana has several products relating to Internet Development and other technologies and also has a full range of consulting/contract services.\line \line For the latest information on Arcana Technologies, please visit our website at {\uldb http://www.arcanatech.com.}{\v !ExecFile('http://www.arcanatech.com.') }}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_Overview_Package }}}
+{A{\footnote {A}{ Overview_Package }}}
+{${\footnote {$}{ Package Overview }}}
+{K{\footnote {K}{ Overview }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 Package Overview\line }
+\par
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Units:\line }
+\pard\tx4000\tx8000\tx12000{\uldb\f1\fs20\cf0 DataModuleServerPool / DataModulePool}
+\pard\tx4000\tx8000\tx12000{\v\f1\fs20\cf0 IDH_DataModuleServerPool / DataModulePool_Unit}
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0  }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \tab }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \line }
+\par
+\pard\tx{\f1\fs20\cf0 \line This help file is a component help reference and usage guide for Arcana's Open Source DataModule Pooling components, TArcDMServerPool and TDataModulePool.  Usage of the two components is identical, so reference has only been provided for TArcDMServerPool (the newer of the two).  In 99.9% of all cases, usage documentation for one component applies completely to the other component as well.\line \line You might be asking yourself a question.  If TArcDMServerPool and TDataModulePool are functionally the same, then why have two components?\line \line TDataModulePool came first.  It was designed to be a flexible pooling solution to be used in any application.  We wanted to allow the use of pooling in everything from standard windows applications to web server applications.  This caused a need to have an extra layer of threading code.  When used in server applications, this resulted in extra overhead reducing the potential scalability.  An additional side effect was that threading could hang on shutdown effectively wreaking havoc on servers such as Apache and to a lesser extent IIS.\line \line TArcDMServerPool was then developed as a lighter pooling solution with no extra layer of threading.  This pool component must be used in an already threaded application such as a web server.  When you lock/unlock your data module, you must be within a single thread and that thread should be different than other threads that will be accessing your pool.  If you code for IntraWeb, WebSnap, WebBroker or other server application for Delphi, this is usually taken care of for you and requires no extra knowledge.  Likewise, if you are developing a server application with Indy, accessing the TArcDMServerPool from the OnExecute event is completely safe as that event is called from a threaded operation.\line \line In either case, the two components are developed with the exact same public interface.  If you previous had used TDataModulePool, switching to the TArcDMServerPool should be as simple as changing the class name when the component is created, or in the dfm if you use the design-time component.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_DataModuleServerPool / DataModulePool_Unit }}}
+{A{\footnote {A}{ DataModuleServerPool / DataModulePool_Unit;DataModuleServerPool / DataModulePool }}}
+{${\footnote {$}{ Unit DataModuleServerPool / DataModulePool }}}
+{K{\footnote {K}{ DataModuleServerPool / DataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 Unit DataModuleServerPool / DataModulePool\line }
+\par
+\pard\tx{\uldb\f1\fs16\cf0 Overview}
+\pard\tx{\v\f1\fs16\cf0 IDH_Overview_Package}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Example}
+\pard\tx{\v\f1\fs16\cf0 !AL(100010_Example;100008_Example;100004_Example;100005_Example;100007_Example;100006_Example;100009_Example)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs24\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 Objects:}
+\par
+\pard\tx4000\tx8000\tx12000{\uldb\f1\fs20\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx4000\tx8000\tx12000{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0  }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \tab }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \line }
+\par
+\pard\tx{\b\f1\fs20\cf0 Functions and procedures:}
+\par
+\pard\tx4000\tx8000\tx12000{\uldb\f1\fs20\cf0 MakeUniqueDBName}
+\pard\tx4000\tx8000\tx12000{\v\f1\fs20\cf0 IDH_MakeUniqueDBName_100020}
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0  }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \tab }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \line }
+\par
+\pard\tx{\b\f1\fs20\cf0 Data Types:}
+\par
+\pard\tx4000\tx8000\tx12000{\uldb\f1\fs20\cf0 TDataModuleEvent}
+\pard\tx4000\tx8000\tx12000{\v\f1\fs20\cf0 IDH_TDataModuleEvent_100002}
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0  }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \tab }
+\pard\tx4000\tx8000\tx12000{\f1\fs20\cf0 \line }
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Properties }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Properties. }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Properties }}}
+{>{\footnote {>}{ main }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool properties\line }
+\par
+\pard\tx{\uldb\f1\fs16\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool>main}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Alphabetically}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Properties_Alphabetically>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\ul\f1\fs16\cf0 Legend}
+\pard\tx{\v\f1\fs16\cf0 IDH_Legend_Property}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 In TArcDMServerPool/TDataModulePool}
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Active}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_Active_101633>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 PoolCount}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_PoolCount_101632>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Version}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_Version_101634>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Derived from TComponent}
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComObject}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_comobject,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentCount}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_componentcount,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentIndex}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_componentindex,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 Components}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_components,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentState}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_componentstate,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentStyle}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_componentstyle,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 DesignInfo}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_designinfo,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Name}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_name,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 Owner}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_owner,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Tag}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_tag,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 VCLComObject}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_vclcomobject,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Properties_Alphabetically }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Properties. }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Properties }}}
+{>{\footnote {>}{ main }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool properties\line \line }
+\pard\tx{\uldb\f1\fs16\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool>main}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 By Object}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Properties>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\ul\f1\fs16\cf0 Legend}
+\pard\tx{\v\f1\fs16\cf0 IDH_Legend_Property}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Active}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_Active,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComObject}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ComObject,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentCount}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ComponentCount,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentIndex}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ComponentIndex,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 Components[Index: Integer]}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Components,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentState}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ComponentState,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 ComponentStyle}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ComponentStyle,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 DesignInfo}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_DesignInfo,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Name}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Name,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_READONLY\}}
+\pard\tx{\uldb\f1\fs20\cf0 Owner}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Owner,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 PoolCount}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_PoolCount,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Tag}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Tag,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 VCLComObject}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_VCLComObject,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 Version}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_Version,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Methods }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Methods. }}}
+{>{\footnote {>}{ main }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Methods }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool methods\line \line }
+\pard\tx{\uldb\f1\fs16\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool>main}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Alphabetically}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Methods_Alphabetically>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\ul\f1\fs16\cf0 Legend}
+\pard\tx{\v\f1\fs16\cf0 IDH_Legend_Method}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 In TArcDMServerPool/TDataModulePool}
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 CurrentThreadsInUse}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_CurrentThreadsInUse_100831>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Lock}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_Lock_100829>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Unlock}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_Unlock_100830>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Derived from TComponent}
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 BeforeDestruction}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_beforedestruction,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Create}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_create,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Destroy}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_destroy,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 DestroyComponents}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_destroycomponents,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Destroying}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_destroying,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 ExecuteAction}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_executeaction,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 FindComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_findcomponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 FreeNotification}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_freenotification,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 FreeOnRelease}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_freeonrelease,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 GetNamePath}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_getnamepath,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 GetParentComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_getparentcomponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 HasParent}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_hasparent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 InsertComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_insertcomponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 IsImplementorOf}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_isimplementorof,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 ReferenceInterface}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_referenceinterface,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 RemoveComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_removecomponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 RemoveFreeNotification}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_removefreenotification,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 SafeCallException}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_safecallexception,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 SetSubComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_setsubcomponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 UpdateAction}
+\pard\tx{\v\f1\fs20\cf0 !AL(tcomponent_updateaction,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Derived from TPersistent}
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Assign}
+\pard\tx{\v\f1\fs20\cf0 !AL(tpersistent_assign,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Methods_Alphabetically }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Methods. }}}
+{>{\footnote {>}{ main }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Methods_Alphabetically }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool methods\line \line }
+\pard\tx{\uldb\f1\fs16\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool>main}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 By Object}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Methods>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\ul\f1\fs16\cf0 Legend}
+\pard\tx{\v\f1\fs16\cf0 IDH_Legend_Method}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Assign}
+\pard\tx{\v\f1\fs20\cf0 !AL(TPersistent_Assign,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 BeforeDestruction}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_BeforeDestruction,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Create}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Create,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 CurrentThreadsInUse}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_CurrentThreadsInUse,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Destroy}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Destroy,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 DestroyComponents}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_DestroyComponents,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Destroying}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_Destroying,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 ExecuteAction}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ExecuteAction,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 FindComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_FindComponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 FreeNotification}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_FreeNotification,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 FreeOnRelease}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_FreeOnRelease,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 GetNamePath}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_GetNamePath,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 GetParentComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_GetParentComponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 HasParent}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_HasParent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 InsertComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_InsertComponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 IsImplementorOf}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_IsImplementorOf,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Lock}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_Lock,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 ReferenceInterface}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_ReferenceInterface,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 RemoveComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_RemoveComponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 RemoveFreeNotification}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_RemoveFreeNotification,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 SafeCallException}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_SafeCallException,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 SetSubComponent}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_SetSubComponent,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 Unlock}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_Unlock,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLIC\}}
+\pard\tx{\uldb\f1\fs20\cf0 UpdateAction}
+\pard\tx{\v\f1\fs20\cf0 !AL(TComponent_UpdateAction,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Events }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Events. }}}
+{>{\footnote {>}{ main }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Events }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool events\line \line }
+\pard\tx{\uldb\f1\fs16\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool>main}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Alphabetically}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Events_Alphabetically>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\ul\f1\fs16\cf0 Legend}
+\pard\tx{\v\f1\fs16\cf0 IDH_Legend_Event}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 In TArcDMServerPool/TDataModulePool}
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 OnCreateDataModule}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_OnCreateDataModule_100251>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 OnFreeDataModule}
+\pard\tx{\v\f1\fs20\cf0 IDH_TArcDMServerPool/TDataModulePool_OnFreeDataModule_100252>main}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Events_Alphabetically }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Events. }}}
+{>{\footnote {>}{ main }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Events_Alphabetically }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool events\line \line }
+\pard\tx{\uldb\f1\fs16\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool>main}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 By Object}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Events>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\ul\f1\fs16\cf0 Legend}
+\pard\tx{\v\f1\fs16\cf0 IDH_Legend_Event}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 OnCreateDataModule}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_OnCreateDataModule,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0 \{bmlt $TMP_PUBLISHED\}}
+\pard\tx{\uldb\f1\fs20\cf0 OnFreeDataModule}
+\pard\tx{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_OnFreeDataModule,JUMP,,main)}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f1\fs20\cf0  }
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Object;TArcDMServerPool/TDataModulePool }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool }}}
+{K{\footnote {K}{ TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 \{bmlt TArcDMServerPool/TDataModulePool_Picture.bmp\}TArcDMServerPool/TDataModulePool\line }
+\pard\tx{\ul\f1\fs16\cf0 \line Hierarchy}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Hierarchy}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Properties}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Properties>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Methods}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Methods>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Events}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool_Events>list}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 Example}
+\pard\tx{\v\f1\fs16\cf0 !AL(100004_Example;100005_Example;100007_Example;100006_Example)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Unit\line }
+\pard\tx{\uldb\f1\fs20\cf0 DataModuleServerPool / DataModulePool}
+\pard\tx{\v\f1\fs20\cf0 IDH_DataModuleServerPool / DataModulePool_Unit}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line \line }
+\pard\tx{\b\f2\fs20\cf0 type}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TArcDMServerPool }
+\pard\tx{\f2\fs20\cf0 = }
+\pard\tx{\b\f2\fs20\cf0 class}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 (}
+\pard\tx{\uldb\f2\fs20\cf0 TComponent}
+\pard\tx{\v\f2\fs20\cf0 !AL(TComponent_object,1)}
+\pard\tx{\f2\fs20\cf0 )}
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 This component implements a pool of DataModules.\line }
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Active_101633 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Active;Active_Property;Active }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool.Active }}}
+{K{\footnote {K}{ Active;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.Active\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 See Also}
+\pard\tx{\v\f1\fs16\cf0 !AL(TArcDMServerPool/TDataModulePool_OnCreateDataModule;TArcDMServerPool/TDataModulePool_OnFreeDataModule)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 \line property }
+\pard\tx{\f2\fs20\cf0 Active}
+\pard\tx{\f2\fs20\cf0  : }
+\pard\tx{\f2\fs20\cf0 boolean}
+\pard\tx{\f2\fs20\cf0 ;}
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description}
+\par
+\pard\tx{\f1\fs20\cf0 Setting Active := True will cause a pool of DataModules to be created.  The component will call OnCreateDataModule once for each item to be added to the pool.  The size of the pool is defined by the PoolCount property.\line \line Setting Active := False will cause each DataModule in the pool to be destroyed.  The component will call OnFreeDataModule once for each item in the pool.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_PoolCount_101632 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_PoolCount;PoolCount_Property;PoolCount }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool.PoolCount }}}
+{K{\footnote {K}{ PoolCount;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.PoolCount\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 \line property }
+\pard\tx{\f2\fs20\cf0 PoolCount}
+\pard\tx{\f2\fs20\cf0  : }
+\pard\tx{\f2\fs20\cf0 integer}
+\pard\tx{\f2\fs20\cf0 ;}
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description}
+\par
+\pard\tx{\f1\fs20\cf0 Set PoolCount to the number of DataModules to be created in the pool.  PoolCount can only be set when Active = False.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Version_101634 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Version;Version_Property;Version }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool.Version }}}
+{K{\footnote {K}{ Version;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.Version\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 \line property }
+\pard\tx{\f2\fs20\cf0 Version}
+\pard\tx{\f2\fs20\cf0  : }
+\pard\tx{\f2\fs20\cf0 string}
+\pard\tx{\f2\fs20\cf0 ;}
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description}
+\par
+\pard\tx{\f1\fs20\cf0 Read Version to see the installed version of the pooling component.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_CurrentThreadsInUse_100831 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_CurrentThreadsInUse;CurrentThreadsInUse_Method;CurrentThreadsInUse }}}
+{K{\footnote {K}{ CurrentThreadsInUse;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.CurrentThreadsInUse\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 CurrentThreadsInUse }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 integer; }
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 This method returns the number of DataModules currently locked.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Lock_100829 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Lock;Lock_Method;Lock }}}
+{K{\footnote {K}{ Lock;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.Lock\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 See Also}
+\pard\tx{\v\f1\fs16\cf0 !AL(TArcDMServerPool/TDataModulePool_Unlock)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Lock }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule; }
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 The Lock method is used to retrieve a DataModule and disallows access from the pool.  After Locking a DataModule, you are free to use that DataModule.  When finished using the DataModule, you must return it to the pool via the Unlock method.\line \line It is important to remember that you must Unlock any DataModule locked with the Lock method.  }
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Unlock_100830 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Unlock;Unlock_Method;Unlock }}}
+{K{\footnote {K}{ Unlock;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.Unlock\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 See Also}
+\pard\tx{\v\f1\fs16\cf0 !AL(TArcDMServerPool/TDataModulePool_Lock)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs16\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 procedure}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 Unlock(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule); }
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 The UnLock method is used to return a DataModule to the pool.  All Locked DataModules must be Unlocked.  \line \line It is important that you NEVER access a DataModule once you've passed it to Unlock unless you've again retrieved it via Lock.  Doing so can cause unpredictable effects in your application including seemingly random (and frequent) Access Violations.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_OnCreateDataModule_100251 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_OnCreateDataModule;OnCreateDataModule_Event;OnCreateDataModule }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool.OnCreateDataModule }}}
+{K{\footnote {K}{ OnCreateDataModule;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.OnCreateDataModule\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 See Also}
+\pard\tx{\v\f1\fs16\cf0 !AL(TArcDMServerPool/TDataModulePool_Active)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 property}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnCreateDataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\uldb\f2\fs20\cf0 TDataModuleEvent}
+\pard\tx{\v\f2\fs20\cf0 !AL(TDataModuleEvent_type,1)}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 Use this event to create the DataModule to be added to the pool.  OnCreateDataModule is called once for each DataModule in the pool when Active is set to True.}
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_OnFreeDataModule_100252 }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_OnFreeDataModule;OnFreeDataModule_Event;OnFreeDataModule }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool.OnFreeDataModule }}}
+{K{\footnote {K}{ OnFreeDataModule;TArcDMServerPool/TDataModulePool }}}
+\pard\tx{\b\f1\fs24\cf0 TArcDMServerPool/TDataModulePool.OnFreeDataModule\line }
+\pard\tx{\uldb\f1\fs16\cf0 \line TArcDMServerPool/TDataModulePool}
+\pard\tx{\v\f1\fs16\cf0 IDH_TArcDMServerPool/TDataModulePool}
+\pard\tx{\f1\fs16\cf0  }
+\pard\tx{\f1\fs24\cf0      }
+\pard\tx{\uldb\f1\fs16\cf0 See Also}
+\pard\tx{\v\f1\fs16\cf0 !AL(TArcDMServerPool/TDataModulePool_Active)}
+\pard\tx{\f1\fs16\cf0  }
+\pard\keepn \tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f1\fs20\cf0  }
+\par
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f2\fs20\cf0 property}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 OnFreeDataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\uldb\f2\fs20\cf0 TDataModuleEvent}
+\pard\tx{\v\f2\fs20\cf0 !AL(TDataModuleEvent_type,1)}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0  }
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 Use this event to free DataModules from the pool.  OnFreeDataModule is called once for each DataModule in the pool when Active is set to False.}
+\par
+}\page{
+{#{\footnote {#}{ IDH_TArcDMServerPool/TDataModulePool_Hierarchy }}}
+{${\footnote {$}{ TArcDMServerPool/TDataModulePool Hierarchy. }}}
+{A{\footnote {A}{ TArcDMServerPool/TDataModulePool_Hierarchy }}}
+{>{\footnote {>}{ main }}}
+\pard\tx{\b\f1\fs20\cf0 Hierarchy\line }
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line }
+\pard\tx200\tx400\tx600{\uldb\f1\fs20\cf0 TObject}
+\pard\tx200\tx400\tx600{\v\f1\fs20\cf0 !AL(TObject_object,1)}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0  }
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line \tab |}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line }
+\pard\tx200\tx400\tx600{\uldb\f1\fs20\cf0 TPersistent}
+\pard\tx200\tx400\tx600{\v\f1\fs20\cf0 !AL(TPersistent_object,1)}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0  }
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line \tab |}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line }
+\pard\tx200\tx400\tx600{\uldb\f1\fs20\cf0 TComponent}
+\pard\tx200\tx400\tx600{\v\f1\fs20\cf0 !AL(TComponent_object,1)}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0  }
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line \tab |}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0 \line }
+\pard\tx200\tx400\tx600{\uldb\f1\fs20\cf0 TArcDMServerPool/TDataModulePool}
+\pard\tx200\tx400\tx600{\v\f1\fs20\cf0 !AL(TArcDMServerPool/TDataModulePool_object,1)}
+\pard\tx200\tx400\tx600{\f1\fs20\cf0  }
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_MakeUniqueDBName_100020 }}}
+{A{\footnote {A}{ MakeUniqueDBName_Function;MakeUniqueDBName }}}
+{${\footnote {$}{ MakeUniqueDBName }}}
+{K{\footnote {K}{ MakeUniqueDBName }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 function MakeUniqueDBName\line }
+\par
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Unit}
+\par
+\pard\tx{\uldb\f1\fs20\cf0 DataModuleServerPool / DataModulePool}
+\pard\tx{\v\f1\fs20\cf0 IDH_DataModuleServerPool / DataModulePool_Unit}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line \line }
+\pard\tx{\b\f2\fs20\cf0 function}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 MakeUniqueDBName(Prefix }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\b\f2\fs20\cf0 string=''}
+\pard\tx{\f2\fs20\cf0 ) }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\b\f2\fs20\cf0 string}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 Some Delphi database components will raise an exception if the DatabaseName property is not unique for each instance created.  \line \line If your database components require a unique database name, this function can be used to retrieve a unique name.  }
+\par
+}\page{
+{*{\footnote {*}{  }}}
+{+{\footnote {+}{ auto }}}
+{#{\footnote {#}{ IDH_TDataModuleEvent_100002 }}}
+{A{\footnote {A}{ TDataModuleEvent_Type;TDataModuleEvent }}}
+{${\footnote {$}{ TDataModuleEvent }}}
+{K{\footnote {K}{ TDataModuleEvent }}}
+\pard\keepn \tx{\b\f1\fs24\cf0 TDataModuleEvent\line }
+\par
+\par
+\pard\tx{\b\f1\fs20\cf0 \line Unit}
+\par
+\pard\tx{\uldb\f1\fs20\cf0 DataModuleServerPool / DataModulePool}
+\pard\tx{\v\f1\fs20\cf0 IDH_DataModuleServerPool / DataModulePool_Unit}
+\pard\tx{\f1\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 \line \line }
+\pard\tx{\b\f2\fs20\cf0 type}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\f2\fs20\cf0 TDataModuleEvent }
+\pard\tx{\f2\fs20\cf0 = }
+\pard\tx{\f2\fs20\cf0 procedure(var }
+\pard\tx{\f2\fs20\cf0 ADataModule }
+\pard\tx{\f2\fs20\cf0 : }
+\pard\tx{\f2\fs20\cf0 TDataModule) }
+\pard\tx{\b\f2\fs20\cf0 of}
+\pard\tx{\f2\fs20\cf0  }
+\pard\tx{\b\f2\fs20\cf0 Object}
+\pard\tx{\f2\fs20\cf0 ; }
+\pard\tx{\f2\fs20\cf0 \line }
+\pard\tx{\b\f1\fs20\cf0 \line Description\line }
+\pard\tx{\f1\fs20\cf0 This is the event type of both the OnCreateDataModule and OnFreeDataModule events.}
+\par
+}\page{
+}}

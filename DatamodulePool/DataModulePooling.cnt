@@ -1,0 +1,23 @@
+:Base DataModulePooling.hlp
+:Title  DataModule Pooling
+:Index Index for DataModulePooling.hlp=DataModulePooling.hlp
+1 DataModule Pooling
+2 About DataModule Pooling=IDH_DataModule Pooling_Project
+2 Examples
+2 Packages
+3 Units
+2 Alphabetical Object and Component Listing
+2 TArcDMServerPool/TDataModulePool=IDH_TArcDMServerPool/TDataModulePool
+2 Alphabetical Object and Component Listing, By Unit
+3 DataModuleServerPool / DataModulePool
+3 TArcDMServerPool/TDataModulePool=IDH_TArcDMServerPool/TDataModulePool
+2 Alphabetical Routine Listing
+2 MakeUniqueDBName=IDH_MakeUniqueDBName_100020
+2 Alphabetical Routine Listing, By Unit
+3 DataModuleServerPool / DataModulePool
+3 MakeUniqueDBName=IDH_MakeUniqueDBName_100020
+2 Alphabetical Data Type Listing
+2 TDataModuleEvent=IDH_TDataModuleEvent_100002
+2 Alphabetical Data Type Listing, By Unit
+3 DataModuleServerPool / DataModulePool
+3 TDataModuleEvent=IDH_TDataModuleEvent_100002

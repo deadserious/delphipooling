@@ -1,0 +1,53 @@
+object IWServerController: TIWServerController
+  OldCreateOrder = False
+  AuthBeforeNewSession = False
+  AllowSubFolders = False
+  AppName = 'MyApp'
+  CacheExpiry = 2
+  ComInitialization = ciNone
+  Compression.Enabled = False
+  Compression.Level = 6
+  Description = 'My IntraWeb Application'
+  DebugHTML = False
+  Log = loNone
+  EnableImageToolbar = False
+  ExceptionDisplayMode = smAlert
+  ExecCmd = 'EXEC'
+  HistoryEnabled = False
+  InternalFilesURL = '/'
+  Browser32Behaviour.Netscape4As32 = True
+  Browser32Behaviour.Netscape6As32 = True
+  Browser32Behaviour.IExplorer4As32 = True
+  PageTransitions = False
+  Port = 8888
+  ReEntryOptions.AutoCreateSession = False
+  RestrictIPs = True
+  RestrictSubnet = False
+  RedirectMsgDelay = 0
+  ServerResizeTimeout = 0
+  SessionTrackingMethod = tmURL
+  ShowResyncWarning = True
+  SessionTimeout = 10
+  SupportedBrowsers = [brIE, brOpera, brNetscape6]
+  SSLOptions.NonSSLRequest = nsAccept
+  SSLOptions.Port = 0
+  ThreadPoolSize = 32
+  UnknownBrowserAction = ubReject
+  Version = 'Internal'
+  OnNewSession = IWServerControllerBaseNewSession
+  Left = 367
+  Top = 314
+  Height = 310
+  Width = 342
+  object Pool: TArcDMDataAwarePool
+    DataModuleAdapter = DataModule1.PoolAdapter
+    PoolCount = 20
+    Active = True
+    AutoGrow = False
+    PoolMax = 20
+    Version = '2.0.0'
+    OnGetModuleClass = PoolGetModuleClass
+    Left = 60
+    Top = 12
+  end
+end
